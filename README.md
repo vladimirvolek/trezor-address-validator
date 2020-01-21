@@ -35,6 +35,7 @@ npm install wallet-address-validator
 * Bankex/BKX, `'bankex'` or `'BKX'`
 * BeaverCoin/BVC, `'beavercoin'` or `'BVC'`
 * Biocoin/BIO, `'biocoin'` or `'BIO'`
+* Binance/BNB, `'binance'` or `'BNB'`
 * Bitcoin/BTC, `'bitcoin'` or `'BTC'`
 * BitcoinCash/BCH, `'bitcoincash'` or `'BCH'`
 * BitcoinGold/BTG, `'bitcoingold'` or `'BTG'`
@@ -61,6 +62,7 @@ npm install wallet-address-validator
 * Komodo/KMD, `'komodo'` or `'KMD'`
 
 * Litecoin/LTC, `'litecoin'` or `'LTC'`
+* Luniverse/Luniberse, `'luniberse'`
 
 * Megacoin/MEC, `'megacoin'` or `'MEC'`
 

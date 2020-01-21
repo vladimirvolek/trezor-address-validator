@@ -382,6 +382,16 @@ describe('WAValidator.validate()', function () {
             valid('xrb_1q79ahdr36uqn38p5tp5sqwkn73rnpj1k8obtuetdbjcx37d5gahhd1u9cuh', 'nano');
             valid('nano_1q79ahdr36uqn38p5tp5sqwkn73rnpj1k8obtuetdbjcx37d5gahhd1u9cuh', 'nano');
         });
+
+
+
+        it('should return true for correct binance address', function () {
+            valid('bnb1qfmufc2q30cgw82ykjlpfeyauhcf5mad6p5y8t', 'binance');
+            valid('bnb1hcqaqelrpd30cvdrwamxw3g2u390qecz0zr9fr', 'binance');
+            valid('bnb16hw73zvzmye7x58mqauagf82gd5d3stven24jk', 'binance');
+            valid('bnb1xlvns0n2mxh77mzaspn2hgav4rr4m8eerfju38', 'binance');
+            valid('bnb16hw73zvzmye7x58mqauagf82gd5d3stven24jk', 'bnb');
+        });
     });
 
     describe('invalid results', function () {
@@ -594,6 +604,16 @@ describe('WAValidator.validate()', function () {
             invalid('nano_1f5e4w33ndqbkx4bw5jtp13kp5xghebfxcmw9hdt1f7goid1s4373w6tjdgu', 'nano');
             invalid('xrb_1111111112111111111111111111111111111111111111111111hifc8npp', 'nano');
             invalid('nano_111111111111111111111111111111111111111111111111111hifc8npp', 'nano');
+        });
+
+
+        it('should return false for incorrect binance addresses', function () {
+            commonTests('binance');
+            commonTests('bnb');
+            invalid('xrb_1f5e4w33ndqbkx4bw5jtp13kp5xghebfxcmw9hdt1f7goid1s4373w6tjdgu', 'bnb');
+            invalid('nano_1f5e4w33ndqbkx4bw5jtp13kp5xghebfxcmw9hdt1f7goid1s4373w6tjdgu', 'bnb');
+            invalid('xrb_1111111112111111111111111111111111111111111111111111hifc8npp', 'bnb');
+            invalid('nano_111111111111111111111111111111111111111111111111111hifc8npp', 'bnb');
         });
     });
 });
