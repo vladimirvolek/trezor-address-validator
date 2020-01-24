@@ -20,7 +20,7 @@
 
 var bech32 = require('./bech32');
 
-function convertbits (data, frombits, tobits, pad) {
+function convertbits(data, frombits, tobits, pad) {
   var acc = 0;
   var bits = 0;
   var ret = [];
@@ -47,7 +47,7 @@ function convertbits (data, frombits, tobits, pad) {
   return ret;
 }
 
-function decode (hrp, addr) {
+function decode(hrp, addr) {
   var dec = bech32.decode(addr);
   if (dec === null || dec.hrp !== hrp || dec.data.length < 1 || dec.data[0] > 16) {
     return null;
@@ -59,10 +59,10 @@ function decode (hrp, addr) {
   if (dec.data[0] === 0 && res.length !== 20 && res.length !== 32) {
     return null;
   }
-  return {version: dec.data[0], program: res};
+  return { version: dec.data[0], program: res };
 }
 
-function encode (hrp, version, program) {
+function encode(hrp, version, program) {
   var ret = bech32.encode(hrp, [version].concat(convertbits(program, 8, 5, true)));
   if (decode(hrp, ret) === null) {
     return null;
@@ -70,25 +70,28 @@ function encode (hrp, version, program) {
   return ret;
 }
 
-function isValidAddress(address, hrp) {
-    var hrp = hrp || 'bc';
-    var ret = decode(hrp, address);
+function isValidAddress(address, currency, networkType) {
+  if(!currency.segwitHrp) {
+    return false;
+  }
 
-    if (ret === null) {
-        hrp = 'tb';
-        ret = decode(hrp, address);
-    }
+  var hrp=currency.segwitHrp[networkType];
+  if(!hrp) {
+    return false;
+  }
 
-    if (ret === null) {
-        return false;
-    }
+  var ret = decode(hrp, address);
 
-    var recreate = encode(hrp, ret.version, ret.program);
-    return recreate === address.toLowerCase();
+  if (ret === null) {
+    return false;
+  }
+
+  var recreate = encode(hrp, ret.version, ret.program);
+  return recreate === address.toLowerCase();
 }
 
 module.exports = {
-    encode: encode,
-    decode: decode,
-    isValidAddress: isValidAddress,
+  encode: encode,
+  decode: decode,
+  isValidAddress: isValidAddress,
 };

@@ -12,11 +12,12 @@ var BCHValidator = require('./bch_validator');
 var XLMValidator = require('./stellar_validator');
 var BinanceValidator = require('./binance_validator');
 
-// defines P2PKH and P2SH address types for standard (prod) and testnet networks
+// defines P2PKH, P2SH and bech32 address types for standard (prod) and testnet networks
 var CURRENCIES = [
     {
         name: 'Bitcoin',
         symbol: 'btc',
+        segwitHrp: { prod: 'bc', testnet: 'tb' },
         addressTypes: { prod: ['00', '05'], testnet: ['6f', 'c4', '3c', '26'] },
         validator: BTCValidator
     }, {
@@ -34,6 +35,7 @@ var CURRENCIES = [
     }, {
         name: 'LiteCoin',
         symbol: 'ltc',
+        segwitHrp: { prod: 'ltc', testnet: 'tltc' },
         addressTypes: { prod: ['30', '05', '32'], testnet: ['6f', 'c4', '3a'] },
         validator: BTCValidator
     }, {
@@ -94,13 +96,13 @@ var CURRENCIES = [
     }, {
         name: 'VertCoin',
         symbol: 'vtc',
-        segwitHrp: 'vtc',
-        addressTypes: { prod: ['0x', '47', '71', '05'], testnet: ['6f', 'c4'] },
+        segwitHrp: { prod: 'vtc', testnet: 'tvtc' },
+        addressTypes: { prod: ['47', '05'], testnet: ['4a', 'c4', '6f'] },
         validator: BTCValidator
-
     }, {
         name: 'BitcoinGold',
         symbol: 'btg',
+        segwitHrp: { prod: 'btg', testnet: 'tbtg' },
         addressTypes: { prod: ['26', '17'], testnet: ['6f', 'c4'] },
         validator: BTCValidator
     }, {
@@ -166,7 +168,8 @@ var CURRENCIES = [
     }, {
         name: 'GameCredits',
         symbol: 'game',
-        addressTypes: { prod: ['26', '05'], testnet: [] },
+        segwitHrp: { prod: 'game',  prod: 'tgame' },
+        addressTypes: { prod: ['26', '3e'], testnet: ['6f', '3a'] },
         validator: BTCValidator
     }, {
         name: 'PIVX',
@@ -181,12 +184,14 @@ var CURRENCIES = [
     }, {
         name: 'MonaCoin',
         symbol: 'mona',
-        addressTypes: { prod: ['32', '37'], testnet: [] },
+        segwitHrp: { prod: 'mona',  prod: 'tmona' },
+        addressTypes: { prod: ['32', '37'], testnet: ['6f', '75'] },
         validator: BTCValidator
     }, {
         name: 'DigiByte',
         symbol: 'dgb',
-        addressTypes: { prod: ['1e'], testnet: [] },
+        segwitHrp: { prod: 'dgb' },
+        addressTypes: { prod: ['1e', '3f'], testnet: [] },
         validator: BTCValidator
     }, {
         name: 'Tether',
@@ -215,6 +220,7 @@ var CURRENCIES = [
     }, {
         name: 'Qtum',
         symbol: 'qtum',
+        segwitHrp: { prod: 'qc',  prod: 'tq' },
         addressTypes: { prod: ['3a', '32'], testnet: ['78', '6e'] },
         validator: BTCValidator
     }, {

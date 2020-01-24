@@ -46,7 +46,7 @@ function getAddressType(address, currency) {
 
         if(currency.regex) {
             if(!currency.regex.test(address)) {
-                return false;
+                return null;
             }
         }
 
@@ -61,8 +61,6 @@ function getAddressType(address, currency) {
 }
 
 function isValidP2PKHandP2SHAddress(address, currency, networkType) {
-    networkType = networkType || DEFAULT_NETWORK_TYPE;
-
     var correctAddressTypes;
     var addressType = getAddressType(address, currency);
 
@@ -80,7 +78,8 @@ function isValidP2PKHandP2SHAddress(address, currency, networkType) {
 }
 
 module.exports = {
-    isValidAddress: function (address, currency, networkType) {
-        return isValidP2PKHandP2SHAddress(address, currency, networkType) || segwit.isValidAddress(address, currency.segwitHrp);
+    isValidAddress: function (address, currency, networkType) {        
+        networkType = networkType || DEFAULT_NETWORK_TYPE;
+        return isValidP2PKHandP2SHAddress(address, currency, networkType) || segwit.isValidAddress(address, currency, networkType);
     }
 };
