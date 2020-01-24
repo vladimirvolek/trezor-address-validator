@@ -380,7 +380,7 @@ var CURRENCIES = [
         symbol: 'xsc',
         validator: SCValidator
     }, {
-        name: 'loki',
+        name: 'Loki',
         symbol: 'loki',
         addressTypes: { prod: ['114', '116'], testnet: [] },
         iAddressTypes: { prod: ['115'], testnet: [] },
@@ -472,11 +472,11 @@ var CURRENCIES = [
         symbol: 'temco',
         validator: ETHValidator,
     }, {
-        name: 'luniverse',
+        name: 'Luniverse',
         symbol: 'luniverse',
         validator: ETHValidator,
     }, {
-        name: 'binance',
+        name: 'Binance',
         symbol: 'bnb',
         validator: BinanceValidator,
     }
@@ -496,7 +496,7 @@ module.exports = {
     }
 };
 
-//spit out details for readme.md
+// spit out details for readme.md
 // CURRENCIES
 //     .sort((a, b) => a.name.toUpperCase() > b.name.toUpperCase() ? 1 : -1)
 //     .forEach(c => console.log(`* ${c.name}/${c.symbol} \`'${c.name}'\` or \`'${c.symbol}'\` `));

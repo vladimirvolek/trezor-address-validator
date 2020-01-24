@@ -38,6 +38,7 @@ npm install trezor-address-validator
 * Bankex/bkx `'Bankex'` or `'bkx'`
 * Basic Attention Token/bat `'Basic Attention Token'` or `'bat'`
 * BeaverCoin/bvc `'BeaverCoin'` or `'bvc'`
+* Binance/bnb `'Binance'` or `'bnb'`
 * BioCoin/bio `'BioCoin'` or `'bio'`
 * Bitcoin/btc `'Bitcoin'` or `'btc'`
 * Bitcoin SV/bsv `'Bitcoin SV'` or `'bsv'`
@@ -69,6 +70,7 @@ npm install trezor-address-validator
 * Golem/gnt `'Golem'` or `'gnt'`
 * HedgeTrade/hedg `'HedgeTrade'` or `'hedg'`
 * Hush/hush `'Hush'` or `'hush'`
+* HyperSpace/xsc `'HyperSpace'` or `'xsc'`
 * iExec RLC/rlc `'iExec RLC'` or `'rlc'`
 * Komodo/kmd `'Komodo'` or `'kmd'`
 * LBRY Credits/lbc `'LBRY Credits'` or `'lbc'`
@@ -76,6 +78,7 @@ npm install trezor-address-validator
 * LiteCoin/ltc `'LiteCoin'` or `'ltc'`
 * Loki/loki `'Loki'` or `'loki'`
 * Loom Network/loom `'Loom Network'` or `'loom'`
+* Luniverse/luniverse `'Luniverse'` or `'luniverse'`
 * Maker/mkr `'Maker'` or `'mkr'`
 * Matchpool/gup `'Matchpool'` or `'gup'`
 * MegaCoin/mec `'MegaCoin'` or `'mec'`
