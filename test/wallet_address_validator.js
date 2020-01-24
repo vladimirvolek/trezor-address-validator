@@ -563,6 +563,22 @@ describe('WAValidator.validate()', function () {
             valid('bnb1xlvns0n2mxh77mzaspn2hgav4rr4m8eerfju38', 'binance');
             valid('bnb16hw73zvzmye7x58mqauagf82gd5d3stven24jk', 'bnb');
         });
+
+        it('should return true for correct xtz(tezos) address', function () {
+            valid('tz1Lhf4J9Qxoe3DZ2nfe8FGDnvVj7oKjnMY6', 'xtz');
+            valid('tz1PyxsQ7xVTa5J7gtBeT7pST5Zi5nk5GSjg', 'xtz');
+            valid('tz1LcuQHNVQEWP2fZjk1QYZGNrfLDwrT3SyZ', 'xtz');
+            valid('tz1Lhf4J9Qxoe3DZ2nfe8FGDnvVj7oKjnMY6', 'xtz');
+            valid('tz1RR6wETy9BeXG3Fjk25YmkSMGHxTtKkhpX', 'xtz');
+            valid('tz1h3rQ8wBxFd8L9B3d7Jhaawu6Z568XU3xY', 'xtz');
+            valid('KT1EM2LvxxFGB3Svh9p9HCP2jEEYyHjABMbK', 'xtz');
+        });
+
+        it('should return true for correct eos addresses', function () {
+            valid('bittrexacct1', 'eos');
+            valid('binancecleos', 'eos');
+            valid('123456789012', 'eos');
+        });
     });
 
     describe('invalid results', function () {
@@ -893,5 +909,25 @@ describe('WAValidator.validate()', function () {
             invalid('xrb_1111111112111111111111111111111111111111111111111111hifc8npp', 'bnb');
             invalid('nano_111111111111111111111111111111111111111111111111111hifc8npp', 'bnb');
         });
+        
+        it('should return false for incorrect xtz(tezos) address', function () {
+            commonTests('xtz');
+            invalid('SBGWKM3CD4IL47QN6X54N6Y33T3JDNVI6AIJ6CD5IM47HG3IG4O36XCU', 'xtz');
+            invalid('GBPXX0A5N4JYPESHAADMQKBPWZWQDQ64ZV6ZL2S3LAGW4SY7NTCMWIVL', 'xtz');
+            invalid('GCFZB6L25D26RQFDWSSBDEYQ32JHLRMTT44ZYE3DZQUTYOL7WY43PLBG', 'xtz');
+            invalid('tz1RR6wy9BeXG3Fjk25YmkSMGHxTtKkhpX', 'xtz');
+            invalid('tz1h3rQ8wBxFd8L9B3d7JhaPQawu6Z568XU3xY', 'xtz');
+            invalid('tz1Lhf4J9Qxoe4DZ2nfe8FGDnvVj7oKjnMY6', 'xtz');
+            invalid('KT1E2LvxxFGB3Svh9p9HCP2jEEYyHjABMbK', 'xtz');
+
+        });
+
+        it('should return false for incorrect eos addresses', function () {
+            commonTests('eos');
+            invalid('1234567890123', 'eos');
+            invalid('12345678901', 'eos');
+            invalid('12345678901@', 'eos');
+        });
+
     });
 });

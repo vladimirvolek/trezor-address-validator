@@ -59,6 +59,7 @@ npm install trezor-address-validator
 * District0x/dnt `'District0x'` or `'dnt'`
 * DogeCoin/doge `'DogeCoin'` or `'doge'`
 * Enjin Coin/enj `'Enjin Coin'` or `'enj'`
+* EOS/eos `'EOS'` or `'eos'`
 * Ethereum/eth `'Ethereum'` or `'eth'`
 * EthereumClassic/etc `'EthereumClassic'` or `'etc'`
 * EtherZero/etz `'EtherZero'` or `'etz'`
@@ -121,6 +122,7 @@ npm install trezor-address-validator
 * TEMCO/temco `'TEMCO'` or `'temco'`
 * TenX/pay `'TenX'` or `'pay'`
 * Tether/usdt `'Tether'` or `'usdt'`
+* Tezos/xtz `'Tezos'` or `'xtz'`
 * Tron/trx `'Tron'` or `'trx'`
 * TrueUSD/tusd `'TrueUSD'` or `'tusd'`
 * VertCoin/vtc `'VertCoin'` or `'vtc'`
