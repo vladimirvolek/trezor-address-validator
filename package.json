@@ -35,13 +35,13 @@
     "browser",
     "nodejs"
   ],
-  "version": "0.3.13",
-  "author": "Chris <chris.tsim@gmail.com>",
-  "homepage": "https://github.com/christsim/multicoin-address-validator",
+  "version": "0.3.14",
+  "author": "Martin <martin.bohm@satoshilabs.com>",
+  "homepage": "https://github.com/trezor/trezor-address-validator",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/christsim/multicoin-address-validator.git"
+    "url": "https://github.com/trezor/trezor-address-validator.git"
   },
   "main": "src/wallet_address_validator",
   "engines": {

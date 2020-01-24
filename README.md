@@ -1,17 +1,15 @@
-# wallet-address-validator
+# trezor-address-validator
 Simple wallet address validator for validating Bitcoin and other altcoins addresses in **Node.js and browser**.
-
-[![Build Status](https://travis-ci.org/christsim/multicoin-address-validator.svg?branch=master)](https://travis-ci.org/christsim/multicoin-address-validator)
 
 Forked from [ryanralph/altcoin-address](https://github.com/ryanralph/altcoin-address).
 
-**File size is ~17 kB (minifed and gzipped)**.
+**File size is ~22 kB (minifed and gzipped)**.
 
 ## Installation
 
 ### NPM
 ```
-npm install multicoin-address-validator
+npm install trezor-address-validator
 ```
 
 ### Browser
@@ -135,7 +133,7 @@ npm install multicoin-address-validator
 
 #### Node
 ```javascript
-var WAValidator = require('multicoin-address-validator');
+var WAValidator = require('trezor-address-validator');
 
 var valid = WAValidator.validate('1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck', 'BTC');
 if(valid)
@@ -147,7 +145,7 @@ else
 ```
 
 ```javascript
-var WAValidator = require('multicoin-address-validator');
+var WAValidator = require('trezor-address-validator');
 
 var valid = WAValidator.validate('1KFzzGtDdnq5hrwxXGjwVnKzRbvf8WVxck', 'litecoin', 'testnet');
 if(valid)
@@ -159,7 +157,7 @@ else
 ```
 
 ```javascript
-var WAValidator = require('multicoin-address-validator');
+var WAValidator = require('trezor-address-validator');
 
 var currency = WAValidator.findCurrency('xrp');
 if(currency)
@@ -171,7 +169,7 @@ else
 ```
 
 ```javascript
-var WAValidator = require('multicoin-address-validator');
+var WAValidator = require('trezor-address-validator');
 
 var currency = WAValidator.findCurrency('random');
 if(currency)
