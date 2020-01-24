@@ -1,6 +1,6 @@
 {
-  "name": "multicoin-address-validator",
-  "description": "Multicoin address validator for Bitcoin and other Altcoins.",
+  "name": "trezor-address-validator",
+  "description": "Multicoin address validator for Bitcoin and other altcoins.",
   "keywords": [
     "ada",
     "btc",
