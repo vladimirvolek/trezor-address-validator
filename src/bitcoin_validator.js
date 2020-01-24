@@ -81,6 +81,6 @@ function isValidP2PKHandP2SHAddress(address, currency, networkType) {
 
 module.exports = {
     isValidAddress: function (address, currency, networkType) {
-        return isValidP2PKHandP2SHAddress(address, currency, networkType) || segwit.isValidAddress(address);
+        return isValidP2PKHandP2SHAddress(address, currency, networkType) || segwit.isValidAddress(address, currency.segwitHrp);
     }
 };

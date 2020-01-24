@@ -10,6 +10,7 @@ var NEMValidator = require('./nem_validator');
 var LSKValidator = require('./lisk_validator');
 var BCHValidator = require('./bch_validator');
 var XLMValidator = require('./stellar_validator');
+var BinanceValidator = require('./binance_validator');
 
 // defines P2PKH and P2SH address types for standard (prod) and testnet networks
 var CURRENCIES = [
@@ -93,6 +94,7 @@ var CURRENCIES = [
     }, {
         name: 'VertCoin',
         symbol: 'vtc',
+        segwitHrp: 'vtc',
         addressTypes: { prod: ['0x', '47', '71', '05'], testnet: ['6f', 'c4'] },
         validator: BTCValidator
 
@@ -469,8 +471,15 @@ var CURRENCIES = [
         name: 'TEMCO',
         symbol: 'temco',
         validator: ETHValidator,
+    }, {
+        name: 'luniverse',
+        symbol: 'luniverse',
+        validator: ETHValidator,
+    }, {
+        name: 'binance',
+        symbol: 'bnb',
+        validator: BinanceValidator,
     }
-
 
 ];
 

@@ -231,6 +231,9 @@ describe('WAValidator.validate()', function () {
             valid('mvww6DEJ18dbyQUukpVQXvLgrNDJazZn1Y', 'vertcoin', 'testnet');
             valid('mn3mdEE6cf1snxVsknNz4GRTdSrWXqYp7c', 'VTC', 'testnet');
             valid('Vri6Q4GgNFfdtcpxD961TotJwaSaYQCaL5', 'VTC');
+            valid('vtc1qmzq3erafwvz23yfeu9tu45uz2kx3d7esk0rayg', 'VTC');
+            valid('vtc1qhy8eqwqxpyryz4wctus36yl2uu60t0z6ecrvtc', 'VTC');
+            valid('vtc1qh9y09s2crkp63mk26u3vrq9q4w3h8ee8gepjgw', 'VTC');
         });
 
         it('should return true for correct BitcoinGold addresses', function () {
@@ -315,6 +318,8 @@ describe('WAValidator.validate()', function () {
             valid('qcSLSxN1sngCWSrKFZ6UC7ri4hhVSdq9SU', 'qtum', 'testnet');
             valid('qJnbEdrm9ybjVqDCaX5SWNBHmZy2X7YbPT', 'qtum', 'testnet');
             valid('qchBPDUYswobzpDmY5DsTStt74sTYQtaQv', 'qtum', 'testnet');
+            valid('qbgHcqxXYHVJZXHheGpHwLJsB5epDUtWxe', 'qtum', 'testnet');
+            valid('qZqqcqCsVtP2U38WWaUnwshHRpefvCa8hX', 'qtum', 'testnet');
         });
 
         it('should return true for correct votecoin addresses', function () {
@@ -547,6 +552,14 @@ describe('WAValidator.validate()', function () {
             valid('GDD3XRXU3G4DXHVRUDH7LJM4CD4PDZTVP4QHOO4Q6DELKXUATR657OZV', 'stellar');
             valid('GDTYVCTAUQVPKEDZIBWEJGKBQHB4UGGXI2SXXUEW7LXMD4B7MK37CWLJ', 'stellar');
         });
+
+        it('should return true for correct binance address', function () {
+            valid('bnb1qfmufc2q30cgw82ykjlpfeyauhcf5mad6p5y8t', 'binance');
+            valid('bnb1hcqaqelrpd30cvdrwamxw3g2u390qecz0zr9fr', 'binance');
+            valid('bnb16hw73zvzmye7x58mqauagf82gd5d3stven24jk', 'binance');
+            valid('bnb1xlvns0n2mxh77mzaspn2hgav4rr4m8eerfju38', 'binance');
+            valid('bnb16hw73zvzmye7x58mqauagf82gd5d3stven24jk', 'bnb');
+        });
     });
 
     describe('invalid results', function () {
@@ -620,6 +633,9 @@ describe('WAValidator.validate()', function () {
 
         it('should return false for incorrect vertcoin addresses', function () {
             commonTests('vertcoin');
+            invalid('vtc1qmzq3erafwvz23yabc9tu45uz2kx3d7esk0rayg', 'vertcoin');
+            invalid('vtc1qhy8eqwqxpyryz4wctus36yl2uu60t0z6ecrvt', 'vertcoin');
+            invalid('vtd1qhy8eqwqxpyryz4wctus36yl2uu60t0z6ecrvtc', 'vertcoin');
         });
 
         it('should return false for incorrect bitcoingold addresses', function () {
@@ -698,6 +714,7 @@ describe('WAValidator.validate()', function () {
             commonTests('qtum');
             invalid('QNPhBbVhDghASxcUh2vHotQUgNeLRFTcfb', 'qtum');
             invalid('QOPhBbVhDghASxcUh2vHotQUgNeLRFTcfa', 'QTUM');
+            invalid('qZqqcqCsVtP2U38ABCUnwshHRpefvCa8hX', 'QTUM', 'testnet');
         });
 
         it('should return false for incorrect votecoin addresses', function () {
@@ -861,6 +878,15 @@ describe('WAValidator.validate()', function () {
             invalid('SAB5556L5AN5KSR5WF7UOEFDCIODEWEO7H2UR4S5R62DFTQOGLKOVZDY', 'stellar');
             invalid('gWRYUerEKuz53tstxEuR3NCkiQDcV4wzFHmvLnZmj7PUqxW2wt', 'stellar');
             invalid('g4VPBPrHZkfE8CsjuG2S4yBQNd455UWmk', 'stellar');
+        });
+
+        it('should return false for incorrect binance addresses', function () {
+            commonTests('binance');
+            commonTests('bnb');
+            invalid('xrb_1f5e4w33ndqbkx4bw5jtp13kp5xghebfxcmw9hdt1f7goid1s4373w6tjdgu', 'bnb');
+            invalid('nano_1f5e4w33ndqbkx4bw5jtp13kp5xghebfxcmw9hdt1f7goid1s4373w6tjdgu', 'bnb');
+            invalid('xrb_1111111112111111111111111111111111111111111111111111hifc8npp', 'bnb');
+            invalid('nano_111111111111111111111111111111111111111111111111111hifc8npp', 'bnb');
         });
     });
 });
