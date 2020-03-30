@@ -509,9 +509,9 @@ describe('WAValidator.validate()', function () {
             valid('binanceiost', 'iost')
         });
 
-        it('should return true for correct (M)IOTA addresses', () => {
-            valid('ABFJCYEFHIV9XJY9XKDNYZGHBPYRYNFMUUNXAMZMFIEYSDKNHNEUSEXQYEWQTDNFETUNRSMEKJUCIKEEWFSWZYVFXD', 'iota')
-        });
+        // it('should return true for correct (M)IOTA addresses', () => {
+        //     valid('ABFJCYEFHIV9XJY9XKDNYZGHBPYRYNFMUUNXAMZMFIEYSDKNHNEUSEXQYEWQTDNFETUNRSMEKJUCIKEEWFSWZYVFXD', 'iota')
+        // });
 
         it('should return false for incorrect Ontology addresses', () => {
             invalid('AXu57dhdNDnA5drqJUM2KfoMqgaLwmZwow', 'ont')

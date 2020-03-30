@@ -1,13 +1,15 @@
-var IOTA = require('@iota/validators')
+// iota validation is disabled
 
-function isValidIotaAddress (address, currency, networkType) {
-  var isValid = IOTA.isAddress(address)
-  return isValid
-}
+// var IOTA = require('@iota/validators')
 
-module.exports = {
-  isValidAddress: function (address, currency, networkType) {
-    return isValidIotaAddress(address, currency, networkType)
-  }
-}
+// function isValidIotaAddress (address, currency, networkType) {
+//   var isValid = IOTA.isAddress(address)
+//   return isValid
+// }
+
+// module.exports = {
+//   isValidAddress: function (address, currency, networkType) {
+//     return isValidIotaAddress(address, currency, networkType)
+//   }
+// }
 

@@ -19,7 +19,7 @@ var ATOMValidator = require('./atom_validator');
 var HBARValidator = require('./hbar_validator');
 var ICXValidator = require('./icx_validator');
 var IOSTValidator = require('./iost_validator');
-var IOTAValidator = require('./iota_validator');
+// var IOTAValidator = require('./iota_validator');
 var STEEMValidator = require('./steem_validator');
 var SYSValidator = require('./sys_validator');
 var ZILValidator = require('./zil_validator');
@@ -694,10 +694,11 @@ var CURRENCIES = [
         name: 'Internet of Services',
         symbol: 'IOST',
         validator: IOSTValidator,
-    }, {
-        name: 'Iota',
-        symbol: 'iota',
-        validator: IOTAValidator,
+    // disable iota validation for now
+    // }, {
+    //     name: 'Iota',
+    //     symbol: 'iota',
+    //     validator: IOTAValidator,
     }, {
         name: 'IHT Real Estate Protocol',
         symbol: 'iht',
