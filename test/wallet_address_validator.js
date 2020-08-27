@@ -65,23 +65,9 @@ describe('WAValidator.validate()', function () {
         });
 
         it('should return true for correct bitcoincash addresses', function () {
-            valid('12KYrjTdVGjFMtaxERSk3gphreJ5US8aUP', 'bitcoincash');
-            valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bitcoincash');
-            valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'BCH');
-            valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'Bitcoin');
-            valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bch');
-            valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bch', 'prod');
-            valid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bch', 'both');
-            valid('1oNLrsHnBcR6dpaBpwz3LSwutbUNkNSjs', 'bitcoincash');
-            valid('mzBc4XEFSdzCDcTxAgf6EZXgsZWpztRhef', 'bitcoincash', 'testnet');
-            valid('mzBc4XEFSdzCDcTxAgf6EZXgsZWpztRhef', 'bitcoincash', 'both');
-
-            // p2sh addresses
-            valid('3NJZLcZEEYBpxYEUGewU4knsQRn1WM5Fkt', 'bitcoincash');
-            valid('2MxKEf2su6FGAUfCEAHreGFQvEYrfYNHvL7', 'bitcoincash', 'testnet');
-
             valid('bitcoincash:qq4v32mtagxac29my6gwj6fd4tmqg8rysu23dax807', 'bch');
-
+            valid('bitcoincash:qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyy', 'bch');            
+            valid('bitcoincash:qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyy', 'bch', 'testnet');            
         });
 
         it('should return true for correct litecoin addresses', function () {
@@ -92,7 +78,8 @@ describe('WAValidator.validate()', function () {
             valid('mzBc4XEFSdzCDcTxAgf6EZXgsZWpztRhef', 'litecoin', 'testnet');
 
             // p2sh addresses
-            valid('3NJZLcZEEYBpxYEUGewU4knsQRn1WM5Fkt', 'litecoin');
+            valid('MUWheVyCBf3Fm3WNNXvotQ3Gj8NTSZCBVe', 'litecoin');
+            
             valid('2MxKEf2su6FGAUfCEAHreGFQvEYrfYNHvL7', 'litecoin', 'testnet');
             valid('QW2SvwjaJU8LD6GSmtm1PHnBG2xPuxwZFy', 'litecoin', 'testnet');
             valid('QjpzxpbLp5pCGsCczMbfh1uhC3P89QZavY', 'litecoin', 'testnet');
@@ -261,6 +248,8 @@ describe('WAValidator.validate()', function () {
             valid('D9TDZTR9Z9Mx2NoDJnhqhnYhDLKRAmsL9n', 'digibyte');
             valid('DHRzA1YHA1kFWpz2apRckZJy6KZRyGq4EV', 'digibyte');
             valid('DJ53hTyLBdZp2wMi5BsCS3rtEL1ioYUkva', 'digibyte');
+            valid('SRrevBM5bfZNpFJ4MhzaNfkTghYKoTB6LV', 'digibyte');
+            valid('SckT6Snbv1WR2VYEuCh3upSPquHN57N314', 'digibyte');
         });
 
         it('should return true for correct Ethereum addresses', function () {
@@ -689,14 +678,35 @@ describe('WAValidator.validate()', function () {
 
         it('should return false for incorrect bitcoin addresses', function () {
             commonTests('bitcoin');
+
+            // testnet in prod and prod in testnet
+            invalid('mzBc4XEFSdzCDcTxAgf6EZXgsZWpztRhef', 'btc');
+            invalid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bitcoin', 'testnet');
+
         });
 
         it('should return false for incorrect bitcoincash addresses', function () {
             commonTests('bitcoincash');
+            invalid('12KYrjTdVGjFMtaxERSk3gphreJ5US8aUP', 'bitcoincash');
+            invalid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bitcoincash');
+            invalid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'BCH');
+            invalid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bch');
+            invalid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bch', 'prod');
+            invalid('12QeMLzSrB8XH8FvEzPMVoRxVAzTr5XM2y', 'bch', 'both');
+            invalid('1oNLrsHnBcR6dpaBpwz3LSwutbUNkNSjs', 'bitcoincash');
+            invalid('mzBc4XEFSdzCDcTxAgf6EZXgsZWpztRhef', 'bitcoincash', 'testnet');
+            invalid('mzBc4XEFSdzCDcTxAgf6EZXgsZWpztRhef', 'bitcoincash', 'both');
+            // p2sh addresses
+            invalid('3NJZLcZEEYBpxYEUGewU4knsQRn1WM5Fkt', 'bitcoincash');
+            invalid('2MxKEf2su6FGAUfCEAHreGFQvEYrfYNHvL7', 'bitcoincash', 'testnet');
+            // bitcoincash
+            invalid('bitcoincash:qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyya', 'bch');            
         });
 
         it('should return false for incorrect litecoin addresses', function () {
             commonTests('litecoin');
+            // do not allow old ltc addresses
+            invalid('3NJZLcZEEYBpxYEUGewU4knsQRn1WM5Fkt', 'litecoin');
             invalid('vtc1qmzq3erafwvz23yabc9tu45uz2kx3d7esk0rayg', 'litecoin');
             invalid('ltc1qu7wq0evvgnmyyxcc7xhljavc7duu7js7jxhgjl0p390sy4udvtuq7361dl', 'litecoin');
         });

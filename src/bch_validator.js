@@ -8,13 +8,24 @@ function validateAddress(address, currency, networkType) {
     var raw_address;
 
     var res = address.split(':');
-    if (res.length === 1) {
-        raw_address = address
-    } else {
-        if (res[0] !== 'bitcoincash') {
+    if (currency.symbol === 'bch') {
+        // allow only addresses with prefix bitcoincash for BCH
+        if (res.length !== 2 && res[0] !== 'bitcoincash') {
             return false;
         }
         raw_address = res[1];
+    } else {
+        if (res.length > 2) {
+            return false;
+        }
+        if (res.length === 1) {
+            raw_address = address
+        } else {
+            if (res[0] !== 'bitcoincash') {
+                return false;
+            }
+            raw_address = res[1];
+        }
     }
 
     if (!regexp.test(raw_address)) {
@@ -32,9 +43,9 @@ function validateAddress(address, currency, networkType) {
 
     try {
         if (bech32.verifyChecksum(prefix, decoded)) {
-            return false;    
+            return false;
         }
-    } catch(e) {
+    } catch (e) {
         return false;
     }
     return true;
@@ -42,6 +53,7 @@ function validateAddress(address, currency, networkType) {
 
 module.exports = {
     isValidAddress: function (address, currency, networkType) {
-        return validateAddress(address, currency, networkType) || BTCValidator.isValidAddress(address, currency, networkType);
+        return validateAddress(address, currency, networkType) ||
+            (currency.symbol !== 'bch' && BTCValidator.isValidAddress(address, currency, networkType));
     }
 }
