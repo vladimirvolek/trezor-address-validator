@@ -10395,24 +10395,16 @@ function validateAddress(address, currency, networkType) {
     var raw_address;
 
     var res = address.split(':');
-    if (currency.symbol === 'bch') {
-        // allow only addresses with prefix bitcoincash for BCH
-        if (res.length !== 2 && res[0] !== 'bitcoincash') {
+    if (res.length > 2) {
+        return false;
+    }
+    if (res.length === 1) {
+        raw_address = address
+    } else {
+        if (res[0] !== 'bitcoincash') {
             return false;
         }
         raw_address = res[1];
-    } else {
-        if (res.length > 2) {
-            return false;
-        }
-        if (res.length === 1) {
-            raw_address = address
-        } else {
-            if (res[0] !== 'bitcoincash') {
-                return false;
-            }
-            raw_address = res[1];
-        }
     }
 
     if (!regexp.test(raw_address)) {

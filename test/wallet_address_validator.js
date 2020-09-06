@@ -67,7 +67,9 @@ describe('WAValidator.validate()', function () {
         it('should return true for correct bitcoincash addresses', function () {
             valid('bitcoincash:qq4v32mtagxac29my6gwj6fd4tmqg8rysu23dax807', 'bch');
             valid('bitcoincash:qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyy', 'bch');            
+            valid('qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyy', 'bch');            
             valid('bitcoincash:qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyy', 'bch', 'testnet');            
+            valid('qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyy', 'bch', 'testnet');            
         });
 
         it('should return true for correct litecoin addresses', function () {
@@ -701,6 +703,7 @@ describe('WAValidator.validate()', function () {
             invalid('2MxKEf2su6FGAUfCEAHreGFQvEYrfYNHvL7', 'bitcoincash', 'testnet');
             // bitcoincash
             invalid('bitcoincash:qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyya', 'bch');            
+            invalid('qp3wjpa3tjlj042z2wv7hahsldgwhwy0rq9sywjpyya', 'bch');            
         });
 
         it('should return false for incorrect litecoin addresses', function () {
