@@ -5,6 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "yarn test:node",
+            "request": "launch",
+            "runtimeArgs": [
+                "test:node",
+            ],
+            "runtimeExecutable": "yarn",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "pwa-node"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Mocha Tests",

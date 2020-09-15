@@ -35,7 +35,7 @@
     "browser",
     "nodejs"
   ],
-  "version": "0.3.21",
+  "version": "0.3.22",
   "author": "Martin <martin.bohm@satoshilabs.com>",
   "homepage": "https://github.com/trezor/trezor-address-validator",
   "license": "MIT",

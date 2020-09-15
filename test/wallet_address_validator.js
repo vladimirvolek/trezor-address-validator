@@ -383,6 +383,9 @@ describe('WAValidator.validate()', function () {
             valid('DdzFFzCqrhsfdzUZxvuBkhV8Lpm9p43p9ubh79GCTkxJikAjKh51qhtCFMqUniC5tv5ZExyvSmAte2Du2tGimavSo6qSgXbjiy8qZRTg', 'ada');
             valid('Ae2tdPwUPEZKmwoy3AU3cXb5Chnasj6mvVNxV1H11997q3VW5ihbSfQwGpm', 'ada');
             valid('4swhHtxKapQbj3TZEipgtp7NQzcRWDYqCxXYoPQWjGyHmhxS1w1TjUEszCQT1sQucGwmPQMYdv1FYs3d51KgoubviPBf', 'cardano');
+            valid('addr1qxnv5u3vrx2t37h3u27qd5ukgcjmrl4f8mu9f5sza3h20cxsfjh80un9kvlggfcdw8fp5kqp9tztqnee9msd0qsafhdsyqclvk', 'cardano');
+            valid('ADDR1QXNV5U3VRX2T37H3U27QD5UKGCJMRL4F8MU9F5SZA3H20CXSFJH80UN9KVLGGFCDW8FP5KQP9TZTQNEE9MSD0QSAFHDSYQCLVK', 'cardano');
+            valid('addr1qxclz0u9guazk70l9vv3xf67wx3psx3dekasvy43xfvz56qcs6f7ssw2x0fcesudyj8h224rnzkae2lqlnw8f3353t3sjggfx0', 'cardano');            
         });
 
         it('should return true for correct monero addresses', function () {
@@ -911,6 +914,8 @@ describe('WAValidator.validate()', function () {
             invalid('Ae2tdPwUPEYxYNJw1He1esdZYvjmr4NtPzUsGTiqL9zd8ohjZYQcwu6lom7', 'cardano');
             invalid('DdzFFzCqrhsfdzUZxvuBkhV8Lpm9p43p9ubh79GCTkxJikAjKh51qhtCFMqUniC5tv5ZExyvSmAte2Du2tGimavSo6qSgXbjiy8qZRTg1', 'cardano');
             invalid('DdzFFzCqrhsfdzUZxvuBkhV8Lpm9p43p9ubh79GCTkxJikAjKh51qhtCFMqUniC5tv5ZExyvSmAte2Du2tGimavSo6qSgXbjiy8qZRT', 'ada');
+            invalid('ADDR1qXNV5U3VRX2T37H3U27QD5UKGCJMRL4F8MU9F5SZA3H20CXSFJH80UN9KVLGGFCDW8FP5KQP9TZTQNEE9MSD0QSAFHDSYQCLVK', 'cardano');
+            invalid('addr1qxnv5u3vrx2t37h3u27qd5ukgcjmrl4f8mu9f5sza3h20cxsfjh80un9kvlggfcdw8fp5kqp9tztqnee9msd0qsafhdsyqclvl', 'cardano');
             //invalid('t2YNzUUx8mWBCRYPRezvA363EYXyEpHokyi', 'komodo', 'testnet');
         });
 

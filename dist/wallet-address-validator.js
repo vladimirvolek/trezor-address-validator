@@ -10285,7 +10285,9 @@ SafeBuffer.allocUnsafeSlow = function (size) {
 var cbor = require('cbor-js');
 var CRC = require('crc');
 var base58 = require('./crypto/base58');
+var bech32 = require('./crypto/bech32');
 
+var DEFAULT_NETWORK_TYPE = 'prod';
 
 function getDecoded(address) {
     try {
@@ -10297,28 +10299,53 @@ function getDecoded(address) {
     }
 }
 
+function isValidLegacyAddress(address) {
+    var decoded = getDecoded(address);
+
+    if (!decoded || (!Array.isArray(decoded) && decoded.length != 2)) {
+        return false;
+    }
+
+    var tagged = decoded[0];
+    var validCrc = decoded[1];
+    if (typeof (validCrc) != 'number') {
+        return false;
+    }
+
+    // get crc of the payload
+    var crc = CRC.crc32(tagged);
+
+    return crc == validCrc;
+}
+
+// it is not possible to use bitcoin ./crypto/segwit_addr library, the cardano address is too long for that
+function isValidBech32Address(address, currency, networkType) {
+    if (!currency.segwitHrp) {
+        return false;
+    }
+    var hrp = currency.segwitHrp[networkType];
+    if (!hrp) {
+        return false;
+    }
+
+    var dec = bech32.decode(address, 103);
+
+    if (dec === null || dec.hrp !== hrp || dec.data.length < 1 || dec.data[0] > 16) {
+        return false;
+    }
+
+    return true;
+}
+
 module.exports = {
-    isValidAddress: function (address) {
-        var decoded = getDecoded(address);
-
-        if (!decoded || (!Array.isArray(decoded) && decoded.length != 2)) {
-            return false;
-        }
-
-        var tagged = decoded[0];
-        var validCrc = decoded[1];
-        if (typeof (validCrc) != 'number') {
-            return false;
-        }
-
-        // get crc of the payload
-        var crc = CRC.crc32(tagged);
-
-        return crc == validCrc;
+    isValidAddress: function (address, currency, networkType) {
+        networkType = networkType || DEFAULT_NETWORK_TYPE;
+        return isValidLegacyAddress(address)
+            || isValidBech32Address(address, currency, networkType);
     }
 };
 
-},{"./crypto/base58":137,"cbor-js":5,"crc":30}],130:[function(require,module,exports){
+},{"./crypto/base58":137,"./crypto/bech32":138,"cbor-js":5,"crc":30}],130:[function(require,module,exports){
 var base58 = require('./crypto/base58')
 
 const ALLOWED_CHARS = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz'
@@ -10734,7 +10761,8 @@ function encode (hrp, data) {
   return ret;
 }
 
-function decode (bechString) {
+function decode (bechString, maxLength) {
+  maxLength=maxLength || 90;
   var p;
   var has_lower = false;
   var has_upper = false;
@@ -10754,7 +10782,7 @@ function decode (bechString) {
   }
   bechString = bechString.toLowerCase();
   var pos = bechString.lastIndexOf('1');
-  if (pos < 1 || pos + 7 > bechString.length || bechString.length > 90) {
+  if (pos < 1 || pos + 7 > bechString.length || bechString.length > maxLength) {
     return null;
   }
   var hrp = bechString.substring(0, pos);
@@ -14100,6 +14128,7 @@ var CURRENCIES = [
     }, {
         name: 'Cardano',
         symbol: 'ada',
+        segwitHrp: { prod: 'addr' },
         validator: ADAValidator,
     }, {
         name: 'Monero',

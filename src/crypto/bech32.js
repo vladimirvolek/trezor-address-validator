@@ -78,7 +78,8 @@ function encode (hrp, data) {
   return ret;
 }
 
-function decode (bechString) {
+function decode (bechString, maxLength) {
+  maxLength=maxLength || 90;
   var p;
   var has_lower = false;
   var has_upper = false;
@@ -98,7 +99,7 @@ function decode (bechString) {
   }
   bechString = bechString.toLowerCase();
   var pos = bechString.lastIndexOf('1');
-  if (pos < 1 || pos + 7 > bechString.length || bechString.length > 90) {
+  if (pos < 1 || pos + 7 > bechString.length || bechString.length > maxLength) {
     return null;
   }
   var hrp = bechString.substring(0, pos);
