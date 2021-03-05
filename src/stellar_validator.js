@@ -14,14 +14,6 @@ function swap16(number) {
     return (lower << 8) | upper;
 }
 
-function numberToHex(number) {
-    let hex = number.toString(16);
-    if (hex.length % 2 === 1) {
-        hex = '0' + hex;
-    }
-    return hex;
-}
-
 module.exports = {
     isValidAddress: function (address) {
         if (regexp.test(address)) {
@@ -32,15 +24,15 @@ module.exports = {
     },
 
      verifyChecksum: function (address) {
-        // based on https://github.com/stellar/js-stellar-base/blob/master/src/strkey.js#L126
+        // based on https://github.com/stellar/js-stellar-base/blob/master/src/strkey.js
         const bytes = base32.decode(address);
         if (bytes[0] !== ed25519PublicKeyVersionByte) {
             return false;
         }
 
-        const computedChecksum = numberToHex(swap16(crc.crc16xmodem(bytes.slice(0, -2))));
+        const payload = bytes.slice(0, -2);
         const checksum = cryptoUtils.toHex(bytes.slice(-2));
-
-        return computedChecksum === checksum
+        const computedChecksum = cryptoUtils.numberToHex(swap16(crc.crc16xmodem(payload)), 2);
+        return computedChecksum === checksum;
     }
 };
