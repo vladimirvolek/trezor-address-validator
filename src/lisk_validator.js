@@ -1,13 +1,20 @@
+const { addressType } = require('../src/crypto/utils');
 var cryptoUtils = require('./crypto/utils');
 
 var regexp = new RegExp('^[0-9]{1,20}L$');
 
 module.exports = {
     isValidAddress: function(address) {
+        return this.getAddressType(address) === addressType.ADDRESS;
+    },
+
+    getAddressType: function(address) {
         if (!regexp.test(address)) {
-            return false;
+            return undefined;
         }
-        return this.verifyAddress(address)
+        if(this.verifyAddress(address)) {
+            return addressType.ADDRESS;
+        }
     },
 
     verifyAddress: function(address) {

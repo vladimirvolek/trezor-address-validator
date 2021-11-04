@@ -7,6 +7,17 @@ var base32 = require('./base32');
 var BigNum = require('browserify-bignum');
 var groestl = require('groestl-hash-js');
 
+// Address types, compatible with Trezor
+const addressType = {
+    ADDRESS: 'address',
+    P2PKH: 'p2pkh',
+    P2WPKH: 'p2wpkh',
+    P2WSH: 'p2wsh',
+    P2SH: 'p2sh',
+    P2TR: 'p2tr',
+    WITNESS_UNKNOWN: 'p2w-unknown',
+};
+
 function numberToHex(number) {
     var hex = Math.round(number).toString(16)
     if (hex.length === 1) {
@@ -126,5 +137,6 @@ module.exports = {
     bigNumberToBuffer: function(bignumber, size){
         return new BigNum(bignumber).toBuffer({ size, endian: 'big' });
     },
-    base32: base32
+    base32,
+    addressType,
 }

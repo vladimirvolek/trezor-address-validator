@@ -1,6 +1,7 @@
+var bech32 = require('./crypto/bech32');
 var base58 = require('./crypto/base58');
-var segwit = require('./crypto/segwit_addr');
 var cryptoUtils = require('./crypto/utils');
+const { addressType } = require('./crypto/utils');
 
 var DEFAULT_NETWORK_TYPE = 'prod';
 
@@ -62,26 +63,111 @@ function getAddressType(address, currency) {
     return null;
 }
 
-function isValidP2PKHandP2SHAddress(address, currency, networkType) {
-    var correctAddressTypes;
-    var addressType = getAddressType(address, currency);
-
+function getOutputIndex(address, currency, networkType) {
+    let correctAddressTypes;
+    const addressType = getAddressType(address, currency);
     if (addressType) {
         if (networkType === 'prod' || networkType === 'testnet') {
             correctAddressTypes = currency.addressTypes[networkType]
         } else {
             correctAddressTypes = currency.addressTypes.prod.concat(currency.addressTypes.testnet);
         }
-
-        return correctAddressTypes.indexOf(addressType) >= 0;
+        return correctAddressTypes.indexOf(addressType);
     }
+    return null;
+}
 
+function isValidPayToPublicKeyHashAddress(address, currency, networkType) {
+    return getOutputIndex(address, currency, networkType) === 0;
+}
+
+function isValidPayToScriptHashAddress(address, currency, networkType) {
+    return getOutputIndex(address, currency, networkType) > 0;
+}
+
+function isValidPayToWitnessScriptHashAddress(address, currency, networkType) {
+    try {
+        const hrp = currency.segwitHrp[networkType];
+        const decoded = bech32.decode(hrp, address);
+        return decoded && decoded.version === 0 && decoded.program.length === 32;
+    } catch (err) {
+        return null;
+    }
+}
+
+function isValidPayToWitnessPublicKeyHashAddress(address, currency, networkType) {
+    try {
+        const hrp = currency.segwitHrp[networkType];
+        const decoded = bech32.decode(hrp, address);
+        return decoded && decoded.version === 0 && decoded.program.length === 20;
+    } catch (err) {
+        return null;
+    }
+}
+
+function isValidPayToTaprootAddress(address, currency, networkType) {
+    try {
+        const hrp = currency.segwitHrp[networkType];
+        decoded = bech32.decode(hrp, address, true);
+        return decoded && decoded.version === 1 && decoded.program.length === 32;
+    } catch (err) {}
+    return null;
+}
+
+function isValidSegwitAddress(address, currency, networkType) {
+    if (!currency.segwitHrp) {
+        return false;
+    }
+    var hrp = currency.segwitHrp[networkType];
+    if (!hrp) {
+        return false;
+    }
+    // try bech32 first
+    let ret = bech32.decode(hrp, address, false);
+    if (ret) {
+        if (ret.version === 0 || ret.program.length === 20 || ret.program.length === 32) {
+            return false;
+        } else {
+            return address.toLowerCase() === bech32.encode(hrp, ret.version, ret.program, false);
+        }
+    }
+    // then try bech32m
+    ret = bech32.decode(hrp, address, true);
+    if (ret) {
+        if (ret.version > 1 || ret.program.length !== 32) {
+            return address.toLowerCase() === bech32.encode(hrp, ret.version, ret.program, true);
+        }
+    }
     return false;
 }
 
 module.exports = {
     isValidAddress: function (address, currency, networkType) {        
         networkType = networkType || DEFAULT_NETWORK_TYPE;
-        return isValidP2PKHandP2SHAddress(address, currency, networkType) || segwit.isValidAddress(address, currency, networkType);
-    }
+        const addrType = this.getAddressType(address, currency, networkType);
+        // Though WITNESS_UNKNOWN is a valid address, it's not spendable - so we mark it as invalid
+        return addrType !== undefined && addrType !== addressType.WITNESS_UNKNOWN;
+    },
+    getAddressType: function(address, currency, networkType) {
+        networkType = networkType || DEFAULT_NETWORK_TYPE;
+        if (isValidPayToPublicKeyHashAddress(address, currency, networkType)) {
+            return addressType.P2PKH;
+        }
+        if (isValidPayToScriptHashAddress(address, currency, networkType)) {
+            return addressType.P2SH;
+        }
+        if (isValidPayToWitnessScriptHashAddress(address, currency, networkType)) {
+            return addressType.P2WSH;
+        }
+        if (isValidPayToWitnessPublicKeyHashAddress(address, currency, networkType)) {
+            return addressType.P2WPKH;
+        }
+        if (isValidPayToTaprootAddress(address, currency, networkType)) {
+            return addressType.P2TR;
+        }
+        if (isValidSegwitAddress(address, currency, networkType)) {
+            return addressType.WITNESS_UNKNOWN;
+        }
+        return undefined;
+    },
 };

@@ -1,7 +1,8 @@
+const { addressType } = require('../src/crypto/utils');
 var cbor = require('cbor-js');
 var CRC = require('crc');
 var base58 = require('./crypto/base58');
-var bech32 = require('./crypto/bech32');
+var { bech32 } = require('bech32');
 
 var DEFAULT_NETWORK_TYPE = 'prod';
 
@@ -44,9 +45,13 @@ function isValidBech32Address(address, currency, networkType) {
         return false;
     }
 
-    var dec = bech32.decode(address, 103);
+    try {
+        var dec = bech32.decode(address, 103);
+    } catch (err) {
+        return false;
+    }
 
-    if (dec === null || dec.hrp !== hrp || dec.data.length < 1 || dec.data[0] > 16) {
+    if (dec === null || dec.prefix !== hrp || dec.words.length < 1 || dec.words[0] > 16) {
         return false;
     }
 
@@ -58,5 +63,11 @@ module.exports = {
         networkType = networkType || DEFAULT_NETWORK_TYPE;
         return isValidLegacyAddress(address)
             || isValidBech32Address(address, currency, networkType);
-    }
+    },
+    getAddressType: function(address, currency, networkType) {
+        if (this.isValidAddress(address, currency, networkType)) {
+            return addressType.ADDRESS;
+        }
+        return undefined;
+    },
 };

@@ -1,6 +1,39 @@
+const { addressType } = require('../src/crypto/utils');
 var cryptoUtils = require('./crypto/utils');
-var bech32 = require('./crypto/bech32');
 var BTCValidator = require('./bitcoin_validator');
+
+var GENERATOR = [0x3b6a57b2, 0x26508e6d, 0x1ea119fa, 0x3d4233dd, 0x2a1462b3];
+
+function polymod(values) {
+    var chk = 1;
+    for (var p = 0; p < values.length; ++p) {
+        var top = chk >> 25;
+        chk = ((chk & 0x1ffffff) << 5) ^ values[p];
+        for (var i = 0; i < 5; ++i) {
+            if ((top >> i) & 1) {
+                chk ^= GENERATOR[i];
+            }
+        }
+    }
+    return chk;
+}
+
+function hrpExpand(hrp) {
+    var ret = [];
+    var p;
+    for (p = 0; p < hrp.length; ++p) {
+        ret.push(hrp.charCodeAt(p) >> 5);
+    }
+    ret.push(0);
+    for (p = 0; p < hrp.length; ++p) {
+        ret.push(hrp.charCodeAt(p) & 31);
+    }
+    return ret;
+}
+
+function verifyChecksum(hrp, data) {
+    return polymod(hrpExpand(hrp).concat(data)) === 1;
+}
 
 function validateAddress(address, currency, networkType) {
     var prefix = 'bitcoincash';
@@ -34,12 +67,13 @@ function validateAddress(address, currency, networkType) {
     }
 
     try {
-        if (bech32.verifyChecksum(prefix, decoded)) {
+        if (verifyChecksum(prefix, decoded)) {
             return false;
         }
     } catch (e) {
         return false;
     }
+
     return true;
 }
 
@@ -47,5 +81,12 @@ module.exports = {
     isValidAddress: function (address, currency, networkType) {
         return validateAddress(address, currency, networkType) ||
             (currency.symbol !== 'bch' && BTCValidator.isValidAddress(address, currency, networkType));
+    },
+    getAddressType: function(address, currency, networkType) {
+        networkType = networkType || DEFAULT_NETWORK_TYPE;
+        if (this.isValidAddress(address, currency, networkType)) {
+            return addressType.ADDRESS;
+        }
+        return undefined;
     }
 }
