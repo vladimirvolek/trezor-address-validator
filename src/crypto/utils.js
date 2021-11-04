@@ -18,12 +18,8 @@ const addressType = {
     WITNESS_UNKNOWN: 'p2w-unknown',
 };
 
-function numberToHex(number) {
-    var hex = Math.round(number).toString(16)
-    if (hex.length === 1) {
-        hex = '0' + hex
-    }
-    return hex
+function numberToHex(number, sizeInBytes) {
+    return Math.round(number).toString(16).padStart(sizeInBytes * 2, '0');
 }
 
 function isHexChar(c) {
@@ -91,10 +87,11 @@ function hexStr2byteArray(str) {
 }
 
 module.exports = {
+    numberToHex,
     toHex: function (arrayOfBytes) {
         var hex = '';
         for (var i = 0; i < arrayOfBytes.length; i++) {
-            hex += numberToHex(arrayOfBytes[i]);
+            hex += numberToHex(arrayOfBytes[i], 1);
         }
         return hex;
     },
