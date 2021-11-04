@@ -559,6 +559,11 @@ describe('WAValidator.validate()', function () {
             isValidAddressType('aaaaaaaaaaaaaaa000000000000000', 'siacoin', 'prod', undefined);
         });
 
+        it('should return true for correct BSC addresses', function () {
+            valid('0x0590396689ee1d287147e9383fb8dd24532f2006', 'bsc');
+            valid('0x07fc5c2bcaa0fa6bdaa4fff897490312c8f33c27', 'binance smart chain');
+        });
+
         it('should return true for correct Cosmos addresses', () => {
             valid('cosmos1xxkueklal9vejv9unqu80w9vptyepfa95pd53u', 'atom')
         });

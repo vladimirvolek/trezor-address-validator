@@ -14910,7 +14910,11 @@ var CURRENCIES = [
         name: 'Zilliqa',
         symbol: 'zil',
         validator: ZILValidator
-	}
+	}, {
+        name: 'Binance Smart Chain',
+        symbol: 'bsc',
+        validator: ETHValidator,
+    }
 ];
 
 
