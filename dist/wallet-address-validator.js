@@ -15567,6 +15567,7 @@ module.exports = {
 };
 },{"../src/crypto/utils":144,"./crypto/utils":144}],163:[function(require,module,exports){
 var currencies = require('./currencies');
+const { addressType } = require('../src/crypto/utils');
 
 var DEFAULT_CURRENCY_NAME = 'bitcoin';
 
@@ -15595,10 +15596,11 @@ module.exports = {
     },
     findCurrency: function(symbol) {
         return currencies.getByNameOrSymbol(symbol) || null ;
-    }
+    },
+    addressType,
 };
 
-},{"./currencies":145}],164:[function(require,module,exports){
+},{"../src/crypto/utils":144,"./currencies":145}],164:[function(require,module,exports){
 const { addressType } = require('../src/crypto/utils');
 const { bech32 } = require('bech32');
 

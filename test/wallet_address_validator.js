@@ -1,11 +1,11 @@
-const { addressType } = require('../src/crypto/utils');
-
 var isNode = typeof module !== 'undefined' && typeof module.exports !== 'undefined'
 
 var chai = isNode ? require('chai') : window.chai,
     expect = chai.expect
 
-var WAValidator = isNode ? require('../src/wallet_address_validator') : window.WAValidator
+var WAValidator = isNode ? require('../src/wallet_address_validator') : window.WAValidator;
+
+const addressType =  WAValidator.addressType;
 
 function isValidAddressType(address, currency, networkType, addressType) {
     const type = WAValidator.getAddressType(address, currency, networkType);

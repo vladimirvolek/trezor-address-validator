@@ -1,4 +1,5 @@
 var currencies = require('./currencies');
+const { addressType } = require('../src/crypto/utils');
 
 var DEFAULT_CURRENCY_NAME = 'bitcoin';
 
@@ -27,5 +28,6 @@ module.exports = {
     },
     findCurrency: function(symbol) {
         return currencies.getByNameOrSymbol(symbol) || null ;
-    }
+    },
+    addressType,
 };
