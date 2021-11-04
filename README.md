@@ -28,6 +28,15 @@ npm install trezor-address-validator
 
 > Returns true if the address (string) is a valid wallet address for the crypto currency specified, see below for supported currencies.
 
+
+##### getAddressType (address [, currency = 'bitcoin'[, networkType = 'prod']])
+
+###### Parameters
+* address - Wallet address to validate.
+* currency - Optional. Currency name or symbol, e.g. `'bitcoin'` (default), `'litecoin'` or `'LTC'`
+* networkType - Optional. Use `'prod'` (default) to enforce standard address, `'testnet'` to enforce testnet address and `'both'` to enforce nothing.
+
+> Returns address type (`'address' | 'p2pkh' | 'p2wpkh' | 'p2wsh' | 'p2sh' | 'p2tr' | 'pw-unknown'`) of the address or `undefined` if the address is invalid.
 ### Supported crypto currencies
 
 * 0x/zrx `'0x'` or `'zrx'`
@@ -57,6 +66,7 @@ npm install trezor-address-validator
 * BeaverCoin/bvc `'BeaverCoin'` or `'bvc'`
 * BetterBetting/betr `'BetterBetting'` or `'betr'`
 * Binance/bnb `'Binance'` or `'bnb'`
+* Binance Smart Chain/bsc `'Binance Smart Chain'` or `'bsc'`
 * Binance USD/busd `'Binance USD'` or `'busd'`
 * BioCoin/bio `'BioCoin'` or `'bio'`
 * Bitcoin/btc `'Bitcoin'` or `'btc'`
