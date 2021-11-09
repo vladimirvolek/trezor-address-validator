@@ -14015,7 +14015,7 @@ var CURRENCIES = [
     }, {
         name: 'Cardano',
         symbol: 'ada',
-        segwitHrp: { prod: 'addr' },
+        segwitHrp: { prod: 'addr', testnet: 'addr_test' },
         validator: ADAValidator,
     }, {
         name: 'Monero',
