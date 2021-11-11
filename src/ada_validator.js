@@ -65,7 +65,6 @@ module.exports = {
             || isValidBech32Address(address, currency, networkType);
     },
     getAddressType: function(address, currency, networkType) {
-        console.log('address',address, this.isValidAddress(address, currency, networkType))
         if (this.isValidAddress(address, currency, networkType)) {
             return addressType.ADDRESS;
         }
