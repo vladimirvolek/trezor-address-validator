@@ -46,7 +46,7 @@ function isValidBech32Address(address, currency, networkType) {
     }
 
     try {
-        var dec = bech32.decode(address, 103);
+        var dec = bech32.decode(address, 108);
     } catch (err) {
         return false;
     }
@@ -65,6 +65,7 @@ module.exports = {
             || isValidBech32Address(address, currency, networkType);
     },
     getAddressType: function(address, currency, networkType) {
+        console.log('address',address, this.isValidAddress(address, currency, networkType))
         if (this.isValidAddress(address, currency, networkType)) {
             return addressType.ADDRESS;
         }

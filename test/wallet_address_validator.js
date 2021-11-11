@@ -435,6 +435,9 @@ describe('WAValidator.validate()', function () {
             valid('addr1qxnv5u3vrx2t37h3u27qd5ukgcjmrl4f8mu9f5sza3h20cxsfjh80un9kvlggfcdw8fp5kqp9tztqnee9msd0qsafhdsyqclvk', 'cardano');
             valid('ADDR1QXNV5U3VRX2T37H3U27QD5UKGCJMRL4F8MU9F5SZA3H20CXSFJH80UN9KVLGGFCDW8FP5KQP9TZTQNEE9MSD0QSAFHDSYQCLVK', 'cardano');
             valid('addr1qxclz0u9guazk70l9vv3xf67wx3psx3dekasvy43xfvz56qcs6f7ssw2x0fcesudyj8h224rnzkae2lqlnw8f3353t3sjggfx0', 'cardano');
+            valid(
+                "addr_test1qru5ktsj5zsmhvwv0ep9zuhfu39x3wyt9wxjnsn3cagsyy59ckxhkvuc5xj49rw6zrp443wlygmhv8gwcu38jk6ms6usqd9a9q", 'cardano', 'testnet'
+            );
         });
 
         it('should match the expected Cardano address type - mainnet', function () {
@@ -442,7 +445,7 @@ describe('WAValidator.validate()', function () {
         });
 
         it('should match the expected Cardano address type - testnet', function () {
-            isValidAddressType('addr_test1qru5ktsj5zsmhvwv0ep9zuhfu39x3wyt9wxjnsn3cagsyy59ckxhkvuc5xj49rw6zrp443wlygmhv8gwcu38jk6ms6usqd9a9q', 'cardano', 'testnet');
+            isValidAddressType('addr_test1qru5ktsj5zsmhvwv0ep9zuhfu39x3wyt9wxjnsn3cagsyy59ckxhkvuc5xj49rw6zrp443wlygmhv8gwcu38jk6ms6usqd9a9q', 'cardano', 'testnet', addressType.ADDRESS);
         });
 
         it('should return true for correct monero addresses', function () {
